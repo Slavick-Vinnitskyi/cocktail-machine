@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.mfxresources.fonts.MFXFontIcon?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+
+<HBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+        fx:controller="com.cocktails.machine.ui.controller.StatusBarController"
+        styleClass="status-bar" prefHeight="48">
+    <padding>
+        <Insets top="16" bottom="16" left="24" right="24"/>
+    </padding>
+    <spacing>16</spacing>
+
+    <HBox fx:id="temperatureContainer" spacing="8" HBox.hgrow="NEVER" alignment="CENTER_LEFT">
+        <MFXFontIcon description="fas-temperature-high" size="18.0" styleClass="status-bar-icon"/>
+        <Label fx:id="temperatureLabel" styleClass="status-bar-label"/>
+    </HBox>
+
+    <Region HBox.hgrow="ALWAYS"/>
+
+    <HBox fx:id="wifiContainer" spacing="8" HBox.hgrow="NEVER" alignment="CENTER_LEFT">
+        <MFXFontIcon description="fas-wifi" size="18.0" styleClass="status-bar-icon"/>
+        <Label fx:id="wifiLabel" text="Connected" styleClass="status-bar-label" maxWidth="150"/>
+    </HBox>
+</HBox>
+

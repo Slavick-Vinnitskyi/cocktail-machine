@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXScrollPane?>
+<?import io.github.palexdev.mfxresources.fonts.MFXFontIcon?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+        fx:controller="com.cocktails.machine.ui.controller.HomeScreenController"
+        styleClass="main-background">
+
+    <HBox VBox.vgrow="ALWAYS" styleClass="main-background">
+        <!-- Sidebar with floating appearance -->
+        <VBox spacing="8" prefWidth="240" minWidth="240" maxWidth="240" HBox.hgrow="NEVER" styleClass="sidebar">
+            <HBox.margin>
+                <Insets top="16" bottom="16" left="16" right="16"/>
+            </HBox.margin>
+            <padding>
+                <Insets top="16" bottom="16" left="16" right="16"/>
+            </padding>
+
+            <Label text="Cocktails" styleClass="sidebar-label">
+                <VBox.margin>
+                    <Insets top="8" bottom="8" left="8"/>
+                </VBox.margin>
+            </Label>
+            <MFXButton fx:id="btnFavourites" text="Favourites" prefHeight="44" maxWidth="Infinity" buttonType="FLAT" graphicTextGap="12">
+                <graphic>
+                    <MFXFontIcon description="fas-heart" size="20.0"/>
+                </graphic>
+            </MFXButton>
+            <MFXButton fx:id="btnAll" text="All" prefHeight="44" maxWidth="Infinity" buttonType="FLAT" graphicTextGap="12">
+                <graphic>
+                    <MFXFontIcon description="fas-list" size="20.0"/>
+                </graphic>
+            </MFXButton>
+
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <Label text="System" styleClass="sidebar-label">
+                <VBox.margin>
+                    <Insets top="16" bottom="8" left="8"/>
+                </VBox.margin>
+            </Label>
+            <MFXButton fx:id="btnSettings" text="Settings" prefHeight="44" maxWidth="Infinity" buttonType="FLAT" graphicTextGap="12">
+                <graphic>
+                    <MFXFontIcon description="fas-gear" size="20.0"/>
+                </graphic>
+            </MFXButton>
+            <MFXButton fx:id="btnExit" text="Exit" prefHeight="44" maxWidth="Infinity" buttonType="FLAT" graphicTextGap="12">
+                <graphic>
+                    <MFXFontIcon description="fas-door-open" size="20.0"/>
+                </graphic>
+            </MFXButton>
+        </VBox>
+
+        <Region prefWidth="2" minWidth="2" maxWidth="2" HBox.hgrow="NEVER"/>
+
+        <MFXScrollPane fitToHeight="true" HBox.hgrow="ALWAYS" styleClass="main-background">
+            <HBox fx:id="cocktailContainer" spacing="24" alignment="CENTER_LEFT" minHeight="200" styleClass="content-background">
+                <padding>
+                    <Insets top="32" bottom="32" left="32" right="32"/>
+                </padding>
+            </HBox>
+        </MFXScrollPane>
+    </HBox>
+</VBox>
+

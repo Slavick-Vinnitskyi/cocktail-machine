@@ -1,0 +1,355 @@
+/* ============================================
+   CSS Variables (Color Palette & Constants)
+   ============================================ */
+
+/* MaterialFX Colors - always available */
+* {
+    -mfx-purple: #9575cd; /* Sophisticated purple that matches dark background */
+}
+
+/*
+    -mfx-red: #EF6E6B;
+    -mfx-yellow: #FFEA00;
+    -mfx-blue: #2196f3;
+    -mfx-charcoal: #445055;
+    -mfx-green: #4caf50;
+    -mfx-onyx: #353935;
+    -mfx-orange: #ff9800;
+*/
+
+/* ============================================
+   THEME VARIABLES
+   ============================================
+   To switch themes, comment out the active theme
+   and uncomment the desired theme section.
+   ============================================ */
+
+/* LIGHT THEME (Active) */
+/*.root {*/
+/*    !* Text Colors *!*/
+/*    -mfx-text-he: rgba(0, 0, 0, 0.87); !* High Emphasis *!*/
+/*    -mfx-text-me: rgba(0, 0, 0, 0.60); !* Medium Emphasis*!*/
+/*    -mfx-text-disabled: rgba(0, 0, 0, 0.38); !* Disabled *!*/
+
+/*    !* Background Colors *!*/
+/*    -bg-primary: #F5F5F5;*/
+/*    -bg-white: white;*/
+/*    -bg-surface: white;*/
+/*    -bg-border: #ebebeb;*/
+
+/*    !* Status Bar *!*/
+/*    -status-bar-bg: white;*/
+/*    -status-bar-text: black;*/
+/*    -status-bar-border: #ebebeb;*/
+
+/*    !* Shadows *!*/
+/*    -shadow-color: rgba(0, 0, 0, 0.15);*/
+/*    -shadow-color-hover: rgba(0, 0, 0, 0.25);*/
+/*    -shadow-color-sidebar: rgba(0, 0, 0, 0.3);*/
+/*    -shadow-color-scroll: rgba(0, 0, 0, 0.26);*/
+/*    -shadow-color-scroll-hover: rgba(0, 0, 0, 0.38);*/
+/*    -shadow-color-progress: rgba(0, 0, 0, 0.12);*/
+
+/*    !* Favorite Icon Color *!*/
+/*    -favorite-gold: #FFD700;*/
+/*    -favorite-icon-unselected: rgba(255, 255, 255, 0.7);*/
+
+/*    -fx-background-color: -bg-primary;*/
+/*}*/
+
+/*!**/
+/*DARK THEME (Commented - Uncomment to activate, and comment out LIGHT THEME above)*/
+
+.root {
+    -mfx-text-he: rgba(255, 255, 255, 0.87);
+    -mfx-text-me: rgba(255, 255, 255, 0.60);
+    -mfx-text-disabled: rgba(255, 255, 255, 0.38);
+
+    -bg-primary: #1a1a24; /* Dark background with subtle purple undertone */
+    -bg-white: #1E1E1E;
+    -bg-surface: #1E1E1E;
+    -bg-border: #2a2a3a; /* Slightly lighter border for subtle definition */
+
+    -status-bar-bg: #1E1E1E;
+    -status-bar-text: rgba(255, 255, 255, 0.87);
+    -status-bar-border: #333333;
+
+    -shadow-color: rgba(0, 0, 0, 0.5);
+    -shadow-color-hover: rgba(0, 0, 0, 0.7);
+    -shadow-color-sidebar: rgba(0, 0, 0, 0.6);
+    -shadow-color-scroll: rgba(255, 255, 255, 0.2);
+    -shadow-color-scroll-hover: rgba(255, 255, 255, 0.3);
+    -shadow-color-progress: rgba(255, 255, 255, 0.1);
+
+    -favorite-gold: #FFD700;
+    -favorite-icon-unselected: rgba(255, 255, 255, 0.5);
+
+    -fx-background-color: -bg-primary;
+}
+
+
+/* ============================================
+   Status Bar
+   ============================================ */
+.status-bar {
+    -fx-background-color: -status-bar-bg;
+    -fx-border-color: -status-bar-border;
+    -fx-border-width: 0 0 1 0;
+}
+
+.status-bar-icon {
+    -fx-text-fill: -status-bar-text;
+}
+
+.status-bar-label {
+    -fx-font-size: 15px;
+    -fx-font-family: 'Tahoma';
+    -fx-text-fill: -status-bar-text;
+}
+
+/* ============================================
+   Layout Backgrounds
+   ============================================ */
+.main-background {
+    -fx-background-color: -bg-primary;
+}
+
+/* Explicit dark theme background (in case variable lookup fails) */
+.root .main-background {
+    -fx-background-color: #1a1a24;
+}
+
+.content-background {
+    -fx-background-color: -bg-surface;
+}
+
+/* Explicit dark theme background for content-background */
+.root .content-background {
+    -fx-background-color: #1a1a24;
+}
+
+/* ============================================
+   Sidebar - MaterialFX Style - Floating
+   ============================================ */
+.sidebar {
+    -fx-background-color: -mfx-purple;
+    -fx-background-insets: 0;
+    -fx-background-radius: 20;
+    -fx-padding: 0;
+    -fx-border-radius: 20;
+    -fx-effect: dropshadow(gaussian, -shadow-color-sidebar, 15, 0, 0, 4);
+}
+
+.sidebar-label {
+    -fx-font-family: 'Tahoma';
+    -fx-font-size: 13px;
+    -fx-opacity: 0.6;
+    -fx-text-fill: white;
+}
+
+.sidebar .mfx-button {
+    /* Apple HIG: Minimum 44px touch target, proper font size */
+    -fx-font-family: 'Tahoma';
+    -fx-font-size: 16px;
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+    -fx-alignment: center-left;
+    -fx-content-display: left;
+    -fx-graphic-text-gap: 12;
+    -fx-background-radius: 8px;
+    -fx-padding: 8px 12px;
+}
+
+.sidebar .mfx-button .text {
+    -fx-text-alignment: left;
+}
+
+.sidebar .mfx-button .mfx-font-icon {
+    -mfx-color: white;
+}
+
+.sidebar .mfx-button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar .mfx-button:selected {
+    -fx-background-color: white;
+    -fx-background-radius: 5;
+    -fx-text-fill: -mfx-purple;
+}
+
+/* MaterialFX Button Styling */
+.mfx-button {
+    -fx-font-family: 'Roboto Medium';
+    -fx-text-fill: -mfx-text-he;
+}
+
+.mfx-button .mfx-ripple-generator {
+    -mfx-ripple-radius: 40;
+    -mfx-auto-clip: true;
+}
+
+.mfx-button .text {
+    -fx-font-smoothing-type: lcd;
+}
+
+/* MaterialFX Labels */
+.mfx-label-title {
+    -fx-font-family: 'Roboto Bold';
+    -fx-font-size: 20px;
+    -fx-text-fill: -mfx-text-he;
+}
+
+/* MaterialFX ScrollPane */
+.mfx-scroll-pane {
+    -fx-background-color: transparent;
+}
+
+/* Ensure scroll pane background is dark in dark theme */
+.root .mfx-scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.root .mfx-scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.mfx-scroll-pane .scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.mfx-scroll-pane .scroll-bar .thumb {
+    -fx-background-color: -shadow-color-scroll;
+    -fx-background-radius: 4px;
+}
+
+.mfx-scroll-pane .scroll-bar .thumb:hover {
+    -fx-background-color: -shadow-color-scroll-hover;
+}
+
+/* Cocktail Card - Apple HIG: Better proportions, refined shadows */
+.cocktail-card {
+    -fx-background-radius: 12px;
+    -fx-effect: dropshadow(gaussian, -shadow-color, 8, 0, 0, 2);
+    -fx-cursor: hand;
+}
+
+.cocktail-card:hover {
+    -fx-effect: dropshadow(gaussian, -shadow-color-hover, 12, 0, 0, 4);
+    -fx-translate-y: -2;
+}
+
+.cocktail-name {
+    /* Apple HIG: Clear typography hierarchy */
+    -fx-font-family: 'Tahoma';
+    -fx-font-size: 17px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -mfx-text-he;
+    -fx-font-smoothing-type: lcd;
+    -fx-line-spacing: 4px;
+}
+
+.cocktail-description {
+    /* Apple HIG: Secondary text, proper line spacing */
+    -fx-font-family: 'Tahoma';
+    -fx-font-size: 14px;
+    -fx-text-fill: -mfx-text-me;
+    -fx-font-smoothing-type: lcd;
+    -fx-line-spacing: 4px;
+}
+
+/* ============================================
+   Cocktail Detail Screen
+   ============================================ */
+.cocktail-detail-name {
+    -fx-font-size: 34px;
+    -fx-font-weight: bold;
+    -fx-font-family: 'Tahoma';
+    -fx-text-fill: -mfx-text-he;
+}
+
+/* Play Button Styles */
+.play-button-container {
+    -fx-background-radius: 100;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-cursor: hand;
+}
+
+.play-button-circle {
+    -fx-fill: transparent;
+    -fx-stroke: rgba(255, 255, 255, 0.8);
+    -fx-stroke-width: 2;
+}
+
+.play-button-icon {
+    -mfx-color: rgba(255, 255, 255, 0.9);
+}
+
+/* Progress Indicator */
+.progress-background-circle {
+    -fx-fill: transparent;
+    -fx-stroke: -shadow-color-progress;
+    -fx-stroke-width: 3;
+}
+
+.progress-circle {
+    -fx-fill: transparent;
+    -fx-stroke: -mfx-purple;
+    -fx-stroke-width: 3;
+    -fx-stroke-linecap: round;
+}
+
+.progress-label {
+    -fx-font-size: 34px;
+    -fx-font-family: 'Tahoma';
+    -fx-font-weight: bold;
+    -fx-fill: -mfx-text-he;
+}
+
+.progress-text {
+    -fx-font-size: 17px;
+    -fx-font-family: 'Tahoma';
+    -fx-fill: -mfx-text-me;
+}
+
+/* ============================================
+   Cocktail Card
+   ============================================ */
+.cocktail-card-image-container {
+    -fx-background-color: -bg-primary;
+    -fx-background-radius: 12px 12px 0 0;
+}
+
+.cocktail-card-content {
+    -fx-background-color: -bg-surface;
+    -fx-background-radius: 0 0 12px 12px;
+}
+
+.favorite-icon {
+    -fx-text-fill: -favorite-gold;
+    -mfx-color: -favorite-gold;
+}
+
+.icon-black {
+    -fx-text-fill: -status-bar-text;
+}
+
+/* Ingredient Text */
+.ingredient-text {
+    -fx-font-size: 17px;
+    -fx-font-family: 'Tahoma';
+    -fx-fill: -mfx-text-he;
+}
+
+/* Favorite Icon States */
+.favorite-icon-filled {
+    -fx-text-fill: -favorite-gold;
+    -mfx-color: -favorite-gold;
+}
+
+.favorite-icon-outline {
+    -fx-text-fill: -favorite-icon-unselected;
+    -mfx-color: -favorite-icon-unselected;
+}
+
