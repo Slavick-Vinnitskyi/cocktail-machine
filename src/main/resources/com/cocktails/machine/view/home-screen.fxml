@@ -29,12 +29,12 @@
                     <Insets top="8" bottom="8" left="8"/>
                 </VBox.margin>
             </Label>
-            <MFXButton fx:id="btnFavourites" text="Favourites" prefHeight="44" maxWidth="Infinity" buttonType="FLAT" graphicTextGap="12">
+            <MFXButton fx:id="btnFavourites" text="Favourites" prefHeight="44" maxWidth="Infinity" buttonType="FLAT" graphicTextGap="12" onAction="#onFavourites">
                 <graphic>
                     <MFXFontIcon description="fas-heart" size="20.0"/>
                 </graphic>
             </MFXButton>
-            <MFXButton fx:id="btnAll" text="All" prefHeight="44" maxWidth="Infinity" buttonType="FLAT" graphicTextGap="12">
+            <MFXButton fx:id="btnAll" text="All" prefHeight="44" maxWidth="Infinity" buttonType="FLAT" graphicTextGap="12" onAction="#onAll">
                 <graphic>
                     <MFXFontIcon description="fas-list" size="20.0"/>
                 </graphic>
@@ -47,12 +47,12 @@
                     <Insets top="16" bottom="8" left="8"/>
                 </VBox.margin>
             </Label>
-            <MFXButton fx:id="btnSettings" text="Settings" prefHeight="44" maxWidth="Infinity" buttonType="FLAT" graphicTextGap="12">
+            <MFXButton fx:id="btnSettings" text="Settings" prefHeight="44" maxWidth="Infinity" buttonType="FLAT" graphicTextGap="12" onAction="#onSettings">
                 <graphic>
                     <MFXFontIcon description="fas-gear" size="20.0"/>
                 </graphic>
             </MFXButton>
-            <MFXButton fx:id="btnExit" text="Exit" prefHeight="44" maxWidth="Infinity" buttonType="FLAT" graphicTextGap="12">
+            <MFXButton fx:id="btnExit" text="Exit" prefHeight="44" maxWidth="Infinity" buttonType="FLAT" graphicTextGap="12" onAction="#onExit">
                 <graphic>
                     <MFXFontIcon description="fas-door-open" size="20.0"/>
                 </graphic>

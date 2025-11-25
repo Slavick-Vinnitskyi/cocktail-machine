@@ -2,100 +2,87 @@ package com.cocktails.machine.ui.controller;
 
 import com.cocktails.machine.model.Cocktail;
 import com.cocktails.machine.repository.CocktailRepository;
-import com.cocktails.machine.ui.widgets.CocktailCard;
-import io.github.palexdev.materialfx.controls.MFXButton;
+import com.cocktails.machine.ui.NavigationManager;
+import com.cocktails.machine.util.ResourceUtils;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.HBox;
+import lombok.extern.slf4j.Slf4j;
 
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+@Slf4j
 public class HomeScreenController implements Initializable {
-    @FXML private MFXButton btnFavourites;
-    @FXML private MFXButton btnAll;
-    @FXML private MFXButton btnSettings;
-    @FXML private MFXButton btnExit;
-    @FXML private HBox cocktailContainer;
 
-    private final CocktailRepository cocktailRepository = CocktailRepository.getInstance();
+    @FXML
+    private HBox cocktailContainer;
+
+    private CocktailFilter cocktailFilter = CocktailFilter.ALL;
+    private static final String COCKTAIL_CARD_FXML = "cocktail-card.fxml";
+    private static final CocktailRepository cocktailRepository = CocktailRepository.getInstance();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Set up button handlers
-        btnFavourites.setOnAction(e -> onFavourites());
-        btnAll.setOnAction(e -> onAll());
-        btnSettings.setOnAction(e -> onSettings());
-        btnExit.setOnAction(e -> onExit());
-
-        // Load initial cocktails
-        setCocktailFilter("All");
+        setCocktailFilter(CocktailFilter.ALL);
     }
 
-    private String currentFilter = "All";
-
-    private void setCocktailFilter(String filterType) {
-        currentFilter = filterType;
+    private void setCocktailFilter(CocktailFilter filterType) {
+        cocktailFilter = filterType;
         refreshCurrentFilter();
     }
 
     private void refreshCurrentFilter() {
         cocktailContainer.getChildren().clear();
 
-        List<Cocktail> filteredCocktails;
-        if ("Favourites".equals(currentFilter)) {
-            filteredCocktails = cocktailRepository.getFavoriteCocktails();
-        } else {
-            filteredCocktails = cocktailRepository.getAllCocktails();
-        }
+        List<Cocktail> filteredCocktails = cocktailRepository.getCocktails(cocktailFilter);
 
-        if (filteredCocktails.isEmpty()) {
-            // Container will be empty but maintain layout
-            return;
-        }
+        filteredCocktails.forEach(cocktail -> {
+            // Load card FXML directly with controller
+            var result = ResourceUtils.<CocktailCardController>loadViewWithController(COCKTAIL_CARD_FXML);
+            CocktailCardController controller = result.getController();
 
-        for (Cocktail cocktail : filteredCocktails) {
-            // Create card with callbacks
-            // onSelect: navigate to detail screen
-            // onFavoriteChanged: refresh UI when favorite status changes
-            CocktailCard card = new CocktailCard(
-                    cocktail,
-                    () -> onCocktailSelect(cocktail),
-                    () -> {
-                        // Refresh current view (e.g., if filtering by favorites)
-                        refreshCurrentFilter();
-                    }
-            );
-            cocktailContainer.getChildren().add(card);
-        }
+            // Set up cocktail data
+            controller.setCocktail(cocktail);
+
+            // Set up callbacks
+            controller.setOnSelect(() -> onCocktailSelect(cocktail));
+            controller.setOnFavoriteChanged(this::refreshCurrentFilter);
+
+            // Add the card view to container
+            cocktailContainer.getChildren().add(result.getParent());
+        });
     }
 
     @FXML
     private void onFavourites() {
-        setCocktailFilter("Favourites");
+        setCocktailFilter(CocktailFilter.FAVOURITES);
     }
 
     @FXML
     private void onAll() {
-        setCocktailFilter("All");
+        setCocktailFilter(CocktailFilter.ALL);
     }
 
     @FXML
     private void onSettings() {
-        // Settings button - no action needed for now
     }
 
     @FXML
     private void onExit() {
-        // Save cocktails before exiting
         cocktailRepository.save();
-        javafx.application.Platform.exit();
+        Platform.exit();
     }
 
     private void onCocktailSelect(Cocktail cocktail) {
-        System.out.println("Selected: " + cocktail.getName());
-        com.cocktails.machine.ui.NavigationManager.getInstance().navigateToCocktailDetail(cocktail);
+        log.info("Selected cocktail: {}", cocktail.getName());
+        NavigationManager.getInstance().navigateToCocktailDetail(cocktail);
+    }
+
+    public enum CocktailFilter {
+        ALL, FAVOURITES
     }
 }
 

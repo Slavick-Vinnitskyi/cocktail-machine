@@ -2,6 +2,7 @@ package com.cocktails.machine.repository;
 
 import com.cocktails.machine.model.Cocktail;
 import com.cocktails.machine.model.CocktailData;
+import com.cocktails.machine.ui.controller.HomeScreenController.CocktailFilter;
 import com.cocktails.machine.util.ResourceUtils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -15,6 +16,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 /**
  * Singleton repository for managing cocktail data.
@@ -118,20 +120,13 @@ public class CocktailRepository {
         }
     }
 
-    /**
-     * Gets all cocktails.
-     */
-    public List<Cocktail> getAllCocktails() {
-        return new ArrayList<>(cocktails);
+    public List<Cocktail> getCocktails(CocktailFilter filterType) {
+        var predicate = getPredicate(filterType);
+        return cocktails.stream().filter(predicate).toList();
     }
 
-    /**
-     * Gets only favorite cocktails.
-     */
-    public List<Cocktail> getFavoriteCocktails() {
-        return cocktails.stream()
-                .filter(Cocktail::isFavorite)
-                .toList();
+    private static Predicate<Cocktail> getPredicate(CocktailFilter filterType) {
+        return filterType == CocktailFilter.FAVOURITES ? Cocktail::isFavorite : cocktail -> true;
     }
 
     /**

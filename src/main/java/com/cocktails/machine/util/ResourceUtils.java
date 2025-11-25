@@ -2,6 +2,7 @@ package com.cocktails.machine.util;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.image.Image;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -13,6 +14,8 @@ public class ResourceUtils {
 
     private static final String VIEWS_FOLDER = "/com/cocktails/machine/view/";
     private static final String STYLES_FOLDER = "/com/cocktails/machine/styles/";
+    private static final String IMAGES_FOLDER = "/com/cocktails/machine/images/";
+    private static final String DEFAULT_COCKTAIL_IMAGE_PATH = "/com/cocktails/machine/images/cocktail.png";
 
     private ResourceUtils() {
     }
@@ -87,6 +90,49 @@ public class ResourceUtils {
      */
     public static URL getResourceURL(String resourcePath) {
         return ResourceUtils.class.getResource(resourcePath);
+    }
+
+    /**
+     * Loads a cocktail image. Returns the appropriate image based on the cocktail's image property.
+     * If the cocktail has a specific image, it will be loaded; otherwise, the default image is used.
+     *
+     * @param imageName The image name from cocktail.getImage() (can be null or empty)
+     * @return Image object for the cocktail
+     */
+    public static Image loadCocktailImage(String imageName) {
+        try {
+            String imagePath;
+            
+            // Determine image path
+            if (imageName != null && !imageName.isEmpty()) {
+                // If image path doesn't start with /, assume it's in images folder
+                if (imageName.startsWith("/")) {
+                    imagePath = imageName;
+                } else {
+                    imagePath = IMAGES_FOLDER + imageName;
+                }
+            } else {
+                imagePath = DEFAULT_COCKTAIL_IMAGE_PATH;
+            }
+
+            // Try to load the specified image
+            URL imageURL = getResourceURL(imagePath);
+            if (imageURL != null) {
+                return new Image(imageURL.toExternalForm());
+            } else {
+                System.err.println("Warning: Cocktail image not found at " + imagePath + ", using default");
+                // Fallback to default image
+                URL defaultURL = getResourceURL(DEFAULT_COCKTAIL_IMAGE_PATH);
+                if (defaultURL != null) {
+                    return new Image(defaultURL.toExternalForm());
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Failed to load cocktail image: " + e.getMessage());
+        }
+        
+        // Return null if all attempts fail
+        return null;
     }
 
     /**

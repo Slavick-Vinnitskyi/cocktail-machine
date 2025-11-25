@@ -6,8 +6,8 @@
 <?import javafx.scene.layout.*?>
 <?import io.github.palexdev.mfxresources.fonts.MFXFontIcon?>
 
-<VBox xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.cocktails.machine.ui.widgets.CocktailCardController"
+<VBox fx:id="root" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.cocktails.machine.ui.controller.CocktailCardController"
       styleClass="cocktail-card" prefWidth="320" prefHeight="480" maxWidth="320" maxHeight="480">
     <spacing>0</spacing>
 

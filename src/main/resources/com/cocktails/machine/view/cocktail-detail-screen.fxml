@@ -28,30 +28,30 @@
             </padding>
 
             <!-- Back Button - Apple HIG: 44px minimum touch target -->
-            <MFXButton fx:id="backButton" text="Back" prefHeight="44" maxWidth="Infinity" buttonType="FLAT" graphicTextGap="12">
+            <MFXButton fx:id="backButton" text="Back" prefHeight="44" maxWidth="Infinity" buttonType="FLAT" graphicTextGap="12" onAction="#onBack">
                 <graphic>
                     <MFXFontIcon description="fas-arrow-left" size="20.0"/>
                 </graphic>
             </MFXButton>
 
             <!-- Favourite Button - Apple HIG: 44px minimum touch target -->
-            <MFXButton fx:id="favoriteButton" text="Favourite" prefHeight="44" maxWidth="Infinity" buttonType="FLAT" graphicTextGap="12">
+            <MFXButton fx:id="favoriteButton" text="Favourite" prefHeight="44" maxWidth="Infinity" buttonType="FLAT" graphicTextGap="12" onAction="#toggleFavorite">
                 <graphic>
-                    <MFXFontIcon fx:id="favoriteIcon" description="fas-star" size="20.0"/>
+                    <MFXFontIcon fx:id="favoriteIcon" description="fas-star" size="20.0" pickOnBounds="true" mouseTransparent="false"/>
                 </graphic>
             </MFXButton>
 
             <Region VBox.vgrow="ALWAYS"/>
 
             <!-- Reload Button - Apple HIG: 44px minimum touch target -->
-            <MFXButton fx:id="reloadButton" text="Reload" prefHeight="44" maxWidth="Infinity" buttonType="FLAT" graphicTextGap="12">
+            <MFXButton fx:id="reloadButton" text="Reload" prefHeight="44" maxWidth="Infinity" buttonType="FLAT" graphicTextGap="12" onAction="#onReload">
                 <graphic>
                     <MFXFontIcon description="fas-circle" size="20.0" styleClass="icon-black"/>
                 </graphic>
             </MFXButton>
 
             <!-- Exit Button - Apple HIG: 44px minimum touch target -->
-            <MFXButton fx:id="exitButton" text="Exit" prefHeight="44" maxWidth="Infinity" buttonType="FLAT" graphicTextGap="12">
+            <MFXButton fx:id="exitButton" text="Exit" prefHeight="44" maxWidth="Infinity" buttonType="FLAT" graphicTextGap="12" onAction="#onExit">
                 <graphic>
                     <MFXFontIcon description="fas-circle" size="20.0" styleClass="icon-black"/>
                 </graphic>
@@ -83,7 +83,7 @@
                     <StackPane fx:id="playButtonContainer" prefWidth="200" prefHeight="200">
                         <Circle radius="100" styleClass="play-button-circle"/>
                         <MFXButton fx:id="playButton" text="" buttonType="RAISED" prefWidth="200" prefHeight="200"
-                                styleClass="play-button-container">
+                                styleClass="play-button-container" onAction="#onPlay">
                             <graphic>
                                 <MFXFontIcon description="fas-play" size="56.0" styleClass="play-button-icon"/>
                             </graphic>
@@ -100,17 +100,17 @@
                 </StackPane>
 
                 <!-- Ingredients and Progress Text Container - Apple HIG: same space to prevent drift -->
-                <StackPane prefWidth="600" prefHeight="120" maxHeight="120" alignment="TOP_LEFT">
-                    <padding>
-                        <Insets left="350"/>
-                    </padding>
+                <StackPane prefWidth="600" prefHeight="120" maxHeight="120">
                     <VBox fx:id="ingredientsContainer" spacing="8" maxHeight="120">
+                        <StackPane.alignment>CENTER</StackPane.alignment>
                         <!-- Ingredients will be added dynamically -->
                     </VBox>
                     <Text fx:id="progressText"
                             text="Dispensing in progress..."
                             styleClass="progress-text"
-                            visible="false">
+                            visible="false"
+                            textAlignment="CENTER">
+                        <StackPane.alignment>CENTER</StackPane.alignment>
                     </Text>
                 </StackPane>
             </VBox>
