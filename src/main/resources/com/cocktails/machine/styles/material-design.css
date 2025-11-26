@@ -344,12 +344,23 @@
 
 /* Favorite Icon States */
 .favorite-icon-filled {
-    -fx-text-fill: -favorite-gold;
-    -mfx-color: -favorite-gold;
+    -fx-text-fill: -favorite-gold !important;
+    -mfx-color: -favorite-gold !important;
 }
 
 .favorite-icon-outline {
-    -fx-text-fill: -favorite-icon-unselected;
-    -mfx-color: -favorite-icon-unselected;
+    -fx-text-fill: white !important;
+    -mfx-color: white !important;
+}
+
+/* Override sidebar button icon color for favorite icons */
+.sidebar .mfx-button .mfx-font-icon.favorite-icon-filled {
+    -mfx-color: -favorite-gold !important;
+    -fx-text-fill: -favorite-gold !important;
+}
+
+.sidebar .mfx-button .mfx-font-icon.favorite-icon-outline {
+    -mfx-color: white !important;
+    -fx-text-fill: white !important;
 }
 

@@ -11,7 +11,9 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class CocktailMachineApplication extends Application {
 
     public static final String TITLE = "Cocktail Machine";
@@ -21,6 +23,11 @@ public class CocktailMachineApplication extends Application {
     public static final int DEFAULT_SCREEN_HEIGHT = 720;
     public static final int STATUS_BAR_HEIGHT = 48;
     public static final int MAIN_SCREEN_HEIGHT = DEFAULT_SCREEN_HEIGHT - STATUS_BAR_HEIGHT;
+
+    @Override
+    public void init() {
+        Thread.setDefaultUncaughtExceptionHandler((t, e) -> log.error("Uncaught exception: ", e));
+    }
 
     @Override
     public void start(Stage stage) {
@@ -78,7 +85,6 @@ public class CocktailMachineApplication extends Application {
 
     @Override
     public void stop() {
-        // Save cocktails on application exit
         CocktailRepository.getInstance().save();
     }
 }

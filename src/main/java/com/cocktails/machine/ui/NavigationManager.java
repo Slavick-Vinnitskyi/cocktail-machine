@@ -41,8 +41,8 @@ public class NavigationManager {
 
     public void navigateToCocktailDetail(Cocktail cocktail) {
         ResourceUtils.ViewResult<CocktailDetailScreenController> result = ResourceUtils.loadViewWithController(COCKTAIL_DETAIL_SCREEN_FXML);
-        result.getController().setCocktail(cocktail);
-        navigateToScreen(result.getParent(), Direction.LEFT);
+        result.controller().setCocktail(cocktail);
+        navigateToScreen(result.parent(), Direction.LEFT);
     }
 
     private void navigateToScreen(Parent screen, Direction direction) {

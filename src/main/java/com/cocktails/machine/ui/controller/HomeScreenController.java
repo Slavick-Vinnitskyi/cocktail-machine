@@ -42,7 +42,7 @@ public class HomeScreenController implements Initializable {
         filteredCocktails.forEach(cocktail -> {
             // Load card FXML directly with controller
             var result = ResourceUtils.<CocktailCardController>loadViewWithController(COCKTAIL_CARD_FXML);
-            CocktailCardController controller = result.getController();
+            CocktailCardController controller = result.controller();
 
             // Set up cocktail data
             controller.setCocktail(cocktail);
@@ -52,7 +52,7 @@ public class HomeScreenController implements Initializable {
             controller.setOnFavoriteChanged(this::refreshCurrentFilter);
 
             // Add the card view to container
-            cocktailContainer.getChildren().add(result.getParent());
+            cocktailContainer.getChildren().add(result.parent());
         });
     }
 

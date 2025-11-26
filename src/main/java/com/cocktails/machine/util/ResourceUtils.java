@@ -3,6 +3,7 @@ package com.cocktails.machine.util;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.image.Image;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -10,6 +11,7 @@ import java.net.URL;
 /**
  * Static utility class for loading views (FXML) and resources (JSON, CSS, etc.).
  */
+@Slf4j
 public class ResourceUtils {
 
     private static final String VIEWS_FOLDER = "/com/cocktails/machine/view/";
@@ -102,7 +104,7 @@ public class ResourceUtils {
     public static Image loadCocktailImage(String imageName) {
         try {
             String imagePath;
-            
+
             // Determine image path
             if (imageName != null && !imageName.isEmpty()) {
                 // If image path doesn't start with /, assume it's in images folder
@@ -120,7 +122,7 @@ public class ResourceUtils {
             if (imageURL != null) {
                 return new Image(imageURL.toExternalForm());
             } else {
-                System.err.println("Warning: Cocktail image not found at " + imagePath + ", using default");
+                log.warn("Cocktail image not found at {}, using default", imagePath);
                 // Fallback to default image
                 URL defaultURL = getResourceURL(DEFAULT_COCKTAIL_IMAGE_PATH);
                 if (defaultURL != null) {
@@ -128,9 +130,9 @@ public class ResourceUtils {
                 }
             }
         } catch (Exception e) {
-            System.err.println("Failed to load cocktail image: " + e.getMessage());
+            log.error("Failed to load cocktail image: {}", e.getMessage(), e);
         }
-        
+
         // Return null if all attempts fail
         return null;
     }
@@ -138,21 +140,7 @@ public class ResourceUtils {
     /**
      * Result class for loading views with controllers.
      */
-    public static class ViewResult<T> {
-        private final Parent parent;
-        private final T controller;
+    public record ViewResult<T>(Parent parent, T controller) {
 
-        public ViewResult(Parent parent, T controller) {
-            this.parent = parent;
-            this.controller = controller;
-        }
-
-        public Parent getParent() {
-            return parent;
-        }
-
-        public T getController() {
-            return controller;
-        }
     }
 }
